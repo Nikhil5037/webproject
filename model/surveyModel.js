@@ -14,7 +14,8 @@ let SurveySchema = new Schema({
     option2: {
         type:String, 
         required: true
-    }
+    },
+    token:String
 })
 
 module.exports = mongoose.model("surveyModel", SurveySchema,"surveys")
