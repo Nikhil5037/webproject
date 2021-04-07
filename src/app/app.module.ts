@@ -16,7 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialsModule } from './materials/materials.module';
 import { EditComponent } from './edit/edit.component';
 import { AuthService } from './authservice.service';
-
+import { AnalyticsComponent } from './analytics/analytics.component';
+import {AnalyticsService} from './analytics.service'
 
 
 
@@ -29,7 +30,8 @@ import { AuthService } from './authservice.service';
     HomeComponent,
     SurveysComponent,
     AddComponent,
-    EditComponent
+    EditComponent,
+    AnalyticsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { AuthService } from './authservice.service';
     BrowserAnimationsModule,
     MaterialsModule
   ],
-  providers: [SurveysService, AuthService,{
+  providers: [SurveysService, AuthService,AnalyticsService,{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true

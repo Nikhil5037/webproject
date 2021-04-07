@@ -4,6 +4,7 @@ import {FormGroup, FormsModule,ReactiveFormsModule} from '@angular/forms'
 import { Router } from '@angular/router';
 import { surveyModel } from '../survey';
 import{SurveysService} from "../surveys.service"
+import { UserModel } from '../user';
 
 @Component({
   selector: 'app-add',
@@ -12,6 +13,7 @@ import{SurveysService} from "../surveys.service"
 })
 export class AddComponent implements OnInit {
   surveyItem:surveyModel[] = []
+  userItem:UserModel
   postUrl = "http://localhost:3000/add"
 
   constructor(private form: FormsModule, private surveyService:SurveysService, private http:HttpClient, private route:Router) { }

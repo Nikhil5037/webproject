@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SurveysComponent } from './surveys/surveys.component';
-
+import {AnalyticsComponent} from './analytics/analytics.component'
 
 //Routing to the website
 const routes: Routes = [
@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path:"edit/:id",
     component:EditComponent
+  },
+  {
+    path:"analytics",
+    component:AnalyticsComponent
   }
 ]
 

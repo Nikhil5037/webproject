@@ -35,6 +35,10 @@ export class SurveysService {
     return this.http.delete<any>(`${this._surveyUrl}/delete/${surveyId}`)
   }
 
+  getAnalytics(){
+    return this.http.get<any>("http://localhost:3000/analytics")
+  }
+
 
   }
 
