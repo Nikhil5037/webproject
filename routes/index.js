@@ -2,6 +2,7 @@ let express = require('express');
 let router = express.Router();
 let jwt = require("jsonwebtoken")
 let surveyItem = require("../model/surveyModel")
+let userModel = require("../model/userModel")
 //let analysisItem = require("../model/analysisModel")
 let mongoose = require("mongoose");
 const { request } = require('express');
@@ -50,7 +51,10 @@ router.post("/add", (req,res)=>{
     surveyName: req.body.surveyName,
     option1: req.body.option1,
     option2: req.body.option2,
-    token:req.headers.authorization.split(' ')[1]
+    userModel:{
+      email: req.body.email
+    }
+    
   })
   newsurveyItem.save((err,item)=>{
     if(err){
@@ -102,12 +106,14 @@ router.delete("/delete/:id",verifyToken, (req,res)=>{
 
 
 //analysis Data
-router.get("/analysis",(req,res)=>{
-  surveyItem.find(({"token":req.headers.authorization.split(' ')[1]}),(err,analysis)=>{
+router.get("/userstats",(req,res)=>{
+
+  surveyItem.find(({"token":req.headers.authorization.split(" ")[1]}),(err,item)=>{
     if(err){
       console.log(err)
     }else{
-      res.json(analysis)
+      //let data = item.surveyName
+      res.json(item)
     }
   })
 })
