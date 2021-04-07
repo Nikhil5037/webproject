@@ -18,6 +18,7 @@
       <li class=" navbar-item"><a class=" nav-link" *ngIf="!verifyLogin()" routerLink = "/login" routerLinkActive = "active">Login</a></li>
       <li class=" navbar-item"><a class=" nav-link" *ngIf="!verifyLogin()" routerLink = "/register" routerLinkActive = "active">Register</a></li>
       <li class=" navbar-item"><a class=" nav-link" *ngIf="verifyLogin()"   routerLink="/home" routerLinkActive = "active" (click)="performLogout()">Logout</a></li>
+      <li class=" navbar-item"><a class=" nav-link" *ngIf="verifyLogin()"   routerLink="/analytics" routerLinkActive = "active">User Analytics</a></li>
 
     </ul>
   </div>

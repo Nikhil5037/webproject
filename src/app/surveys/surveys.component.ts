@@ -19,13 +19,14 @@ export class SurveysComponent implements OnInit {
     private http: HttpClient,
     private route: Router,
     @Inject(DOCUMENT) private document: Document,
-    private auth:AuthService
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
     this._surveyService.getSurveys().subscribe(
       (data) => {
         this.surveyList = data;
+        console.log(localStorage.getItem('token'))
       },
       (err) => console.log(err)
     );
@@ -38,8 +39,7 @@ export class SurveysComponent implements OnInit {
       (err) => console.log(data._id)
     );
   }
-  displayButton(){
-    return this.auth.isLoggedin()
+  displayButton() {
+    return this.auth.isLoggedin();
   }
-
 }
