@@ -2,8 +2,11 @@ let express = require('express');
 let router = express.Router();
 let jwt = require("jsonwebtoken")
 let surveyItem = require("../model/surveyModel")
+let userModel = require("../model/userModel")
+//let analysisItem = require("../model/analysisModel")
 let mongoose = require("mongoose");
 const { request } = require('express');
+const { find } = require('../model/analysisModel');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -43,11 +46,15 @@ router.get("/survey", (req,res)=>{
 })
 
 //add
-router.post("/add",verifyToken, (req,res)=>{
+router.post("/add", (req,res)=>{
   let newsurveyItem = new surveyItem({
     surveyName: req.body.surveyName,
     option1: req.body.option1,
-    option2: req.body.option2
+    option2: req.body.option2,
+    userModel:{
+      email: req.body.email
+    }
+    
   })
   newsurveyItem.save((err,item)=>{
     if(err){
@@ -65,7 +72,8 @@ router.post("/update/:id",verifyToken, (req, res)=>{
     $set:{
       surveyName : req.body.surveyName,
       option1 : req.body.option1,
-      option2: req.body.option2
+      option2: req.body.option2,
+      token: req.header.authorization.split(" ")[1]
     }
   },(err,result)=>{
     if(err){
@@ -96,5 +104,18 @@ router.delete("/delete/:id",verifyToken, (req,res)=>{
   })
 })
 
+
+//analysis Data
+router.get("/userstats",(req,res)=>{
+
+  surveyItem.find(({"token":req.headers.authorization.split(" ")[1]}),(err,item)=>{
+    if(err){
+      console.log(err)
+    }else{
+      //let data = item.surveyName
+      res.json(item)
+    }
+  })
+})
 
 module.exports = router;

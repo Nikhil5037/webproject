@@ -22,7 +22,9 @@ router.post("/register", (req, res)=>{
     }else{
       let payload = {subject:regUser._id}
       let token = jwt.sign(payload, "secretKey")
+      regUser.token = {token:token}
       res.send({token})
+      
       //console.log("User Added")
     }
 
@@ -42,8 +44,10 @@ router.post("/login", (req,res)=>{
         if(user.password != userData.password){
           console.log("Password Incorrect")
         }else{
-          let payload = {subject:user._id}
-          let token = jwt.sign(payload, "secretKey")
+          
+          //let payload = {subject:user._id}
+          //let token = jwt.sign(payload, "secretKey")
+          let token = user.token
           res.send({token})
         }
       }
